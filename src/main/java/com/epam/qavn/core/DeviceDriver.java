@@ -45,14 +45,4 @@ public class DeviceDriver {
         getDriver().quit();
         threadDriver.remove();
     }
-
-    public static void main(String[] args) {
-        DeviceDriver driver = new DeviceDriver();
-        try {
-            driver.setDriver("android_12");
-            System.out.println(driver.getDriver().getSessionId());
-        }catch (UnknownPlatformException platformException) {
-            System.out.println(platformException.getMessage());
-        }
-    }
 }
