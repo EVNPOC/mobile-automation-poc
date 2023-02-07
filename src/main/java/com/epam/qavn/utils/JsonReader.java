@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.Objects;
 
@@ -23,10 +25,10 @@ public class JsonReader {
     public JsonObject getFromResource(String srcFile, String key) {
         try {
             Gson gson = new Gson();
-            String filePath = Objects.requireNonNull(getClass().getClassLoader().getResource(srcFile)).getPath();
+            URI filePath = Objects.requireNonNull(getClass().getClassLoader().getResource(srcFile)).toURI();
             File jsonFile = Paths.get(filePath).toFile();
             return gson.fromJson(new FileReader(jsonFile), JsonObject.class).getAsJsonObject(key);
-        }catch (IOException e) {
+        }catch (IOException | URISyntaxException e) {
             return null;
         }
     }
