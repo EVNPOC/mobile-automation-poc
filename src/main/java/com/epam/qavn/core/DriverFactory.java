@@ -1,47 +1,53 @@
 package com.epam.qavn.core;
 
-import com.epam.qavn.core.DeviceManager.*;
+import com.epam.qavn.core.driverManager.AndroidDriverManager;
+import com.epam.qavn.core.driverManager.DriverManager;
+import com.epam.qavn.core.driverManager.IOSDriverManager;
+import com.epam.qavn.exception.UnknownPlatformException;
+import com.epam.qavn.objects.DeviceInformation;
 import com.epam.qavn.utils.JsonReader;
 import com.google.gson.JsonObject;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.Platform;
 
-public class DeviceDriver {
+public class DriverFactory {
 
     private final ThreadLocal<AppiumDriver> threadDriver;
     private String deviceSourcePath = "devices.json";
     private String unknownPlatformMessage = "Unknown Platform! please use ANDROID or IOS only";
-    private PLATFORM platform;
+    private Platform platform;
 
-    public DeviceDriver() {
+    public DriverFactory() {
         threadDriver = new ThreadLocal<>();
     }
 
     public void setDriver(String deviceName) throws UnknownPlatformException {
-        JsonObject deviceInfo = JsonReader.getInstance().getFromResource(deviceSourcePath, deviceName);
-        Device device = new Device(deviceInfo);
+        JsonObject jsonInfo = JsonReader.getInstance().getFromResource(deviceSourcePath, deviceName);
+        DeviceInformation deviceInfo = new DeviceInformation(jsonInfo);
+        DriverManager driverManager;
         try {
-            platform = PLATFORM.valueOf(device.getPlatformName().toUpperCase());
+            platform = Platform.valueOf(deviceInfo.getPlatformName().toUpperCase());
         } catch (IllegalArgumentException exception) {
             throw new UnknownPlatformException(unknownPlatformMessage);
         }
         switch (platform) {
             case ANDROID:
-                threadDriver.set(new AndroidDevice().getDriver(device));
+                driverManager = new AndroidDriverManager();
                 break;
             case IOS:
-                threadDriver.set(new IOSDevice().getDriver(device));
+                driverManager = new IOSDriverManager();
                 break;
             default:
                 throw new UnknownPlatformException(unknownPlatformMessage);
-
         }
+        threadDriver.set(driverManager.getDriver(deviceInfo));
     }
 
     public AppiumDriver getDriver() {
         return threadDriver.get();
     }
 
-    public void endDriver() {
+    public void removeDriver() {
         getDriver().quit();
         threadDriver.remove();
     }

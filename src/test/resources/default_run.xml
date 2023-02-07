@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="WebdriverIO Native demo app" parallel="tests" thread-count="1">
+    <!-- parallel value: tests / classes / methods -->
+
+    <test name="Android">
+        <parameter name="device" value="android_11"/>
+        <packages>
+            <package name="com.epam.qavn.webdriverio.*" />
+        </packages>
+    </test>
+
+</suite>
