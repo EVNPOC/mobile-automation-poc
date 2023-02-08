@@ -19,7 +19,7 @@ public class AndroidDriverManager extends DriverManager {
                 appPath = appPath.substring(1).replaceAll("/", "//");
             }
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-            desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, device.getPlatformName());
+            desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, device.getPlatformName());
             desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, device.getPlatformVersion());
             desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device.getName());
             desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
