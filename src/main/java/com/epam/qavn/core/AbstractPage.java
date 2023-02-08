@@ -2,6 +2,8 @@ package com.epam.qavn.core;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -23,27 +25,33 @@ import static org.openqa.selenium.interactions.PointerInput.Origin.viewport;
 
 public class AbstractPage {
     private final PointerInput FINGER = new PointerInput(TOUCH, "finger");
+    private Logger logger = LogManager.getLogger();
 
     public WebElement findElementBy(AppiumDriver driver, By by) {
         waitUntilElementVisible(driver, by, Duration.ofSeconds(SHORT_TIME_OUT));
+        logger.debug("Find element by locator: " + by.toString());
         return driver.findElement(by);
     }
 
     public List<WebElement> findElementsBy(AppiumDriver driver, By by) {
         waitUntilElementVisible(driver, by, Duration.ofSeconds(SHORT_TIME_OUT));
+        logger.debug("Find list elements by locator: " + by.toString());
         return driver.findElements(by);
     }
 
     public String getElementText(AppiumDriver driver, By by) {
+        logger.debug("Get element text by locator: " + by.toString());
         return findElementBy(driver, by).getText();
     }
 
     public String getElementAttribute(WebElement element, String attribute) {
+        logger.debug(String.format("Get %s attribute of element %s", attribute, element));
         return element.getAttribute(attribute);
     }
 
     public void inputText(AppiumDriver driver, By by, String text) {
         findElementBy(driver, by).sendKeys(text);
+        logger.debug(String.format("Input %s to element by locator: %s", text, by.toString()));
     }
 
     public void tapCenterOf(AppiumDriver driver, WebElement element, Duration duration) {
@@ -54,6 +62,7 @@ public class AbstractPage {
                 .addAction(new Pause(FINGER, duration))
                 .addAction(FINGER.createPointerUp(LEFT.asArg()));
         driver.perform(Collections.singletonList(tap));
+        logger.debug("Tap on element: " + element);
     }
 
     public void tapByPoint(AppiumDriver driver, Point point, Duration duration) {
@@ -63,6 +72,7 @@ public class AbstractPage {
                 .addAction(new Pause(FINGER, duration))
                 .addAction(FINGER.createPointerUp(LEFT.asArg()));
         driver.perform(Collections.singletonList(tap));
+        logger.debug("Tap at point: " + point);
     }
 
     public void doSwipe(AppiumDriver driver, Point start, Point end, Duration duration) {
@@ -72,6 +82,7 @@ public class AbstractPage {
                 .addAction(FINGER.createPointerMove(duration, viewport(), end.getX(), end.getY()))
                 .addAction(FINGER.createPointerUp(LEFT.asArg()));
         driver.perform(Collections.singletonList(swipe));
+        logger.debug(String.format("Swipe from %s to %s", start, end));
     }
 
     public void doSwipeHorizontalFromRight(AppiumDriver driver, WebElement element, Duration duration) {
@@ -79,6 +90,7 @@ public class AbstractPage {
         double startX = element.getRect().x + (element.getSize().width * 0.9);
         double endX = element.getRect().x + (element.getSize().width * 0.1);
         doSwipe(driver, new Point((int) startX, centerY), new Point((int) endX, centerY), duration);
+        logger.debug(String.format("Swipe element %s to left", element));
     }
 
     public void doSwipeHorizontalFromLeft(AppiumDriver driver, WebElement element, Duration duration) {
@@ -86,6 +98,7 @@ public class AbstractPage {
         double startX = element.getRect().x + (element.getSize().width * 0.1);
         double endX = element.getRect().x + (element.getSize().width * 0.9);
         doSwipe(driver, new Point((int) startX, centerY), new Point((int) endX, centerY), duration);
+        logger.debug(String.format("Swipe element %s to right", element));
     }
 
     public void doSwipeVerticalFromDown(AppiumDriver driver, WebElement element, Duration duration) {
@@ -93,6 +106,7 @@ public class AbstractPage {
         double startY = element.getRect().y + (element.getSize().height * 0.9);
         double endY = element.getRect().y + (element.getSize().height * 0.1);
         doSwipe(driver, new Point(centerX, (int) startY), new Point(centerX, (int) endY), duration);
+        logger.debug(String.format("Swipe element %s to up", element));
     }
 
     public void doSwipeVerticalFromUp(AppiumDriver driver, WebElement element, Duration duration) {
@@ -100,14 +114,17 @@ public class AbstractPage {
         double startY = element.getRect().y + (element.getSize().height * 0.1);
         double endY = element.getRect().y + (element.getSize().height * 0.9);
         doSwipe(driver, new Point(centerX, (int) startY), new Point(centerX, (int) endY), duration);
+        logger.debug(String.format("Swipe element %s to down", element));
     }
 
     public void dragAndDrop(AppiumDriver driver, WebElement start, WebElement end, Duration duration) {
         doSwipe(driver, getCenter(start), getCenter(end), duration);
+        logger.debug(String.format("drag element %s to %s", start, end));
     }
 
     public void dragAndDrop(AppiumDriver driver, Point start, Point end, Duration duration) {
         doSwipe(driver, start, end, duration);
+        logger.debug(String.format("drag element %s to %s", start, end));
     }
 
     public Point getCenter(WebElement element) {
@@ -118,17 +135,21 @@ public class AbstractPage {
 
     public void waitUntilElementVisible(AppiumDriver driver, WebElement element, Duration duration) {
         new WebDriverWait(driver, duration).until(ExpectedConditions.visibilityOf(element));
+        logger.debug(String.format("Wait for element %s to be displayed", element));
     }
 
     public void waitUntilElementVisible(AppiumDriver driver, By by, Duration duration) {
         new WebDriverWait(driver, duration).until(ExpectedConditions.visibilityOfElementLocated(by));
+        logger.debug(String.format("Wait for element %s to be displayed", by.toString()));
     }
 
     public void waitUntilElementClickable(AppiumDriver driver, WebElement element, Duration duration) {
         new WebDriverWait(driver, duration).until(ExpectedConditions.elementToBeClickable(element));
+        logger.debug(String.format("Wait for element %s to be clickable", element));
     }
 
     public void waitUntilElementClickable(AppiumDriver driver, AppiumBy by, Duration duration) {
         new WebDriverWait(driver, duration).until(ExpectedConditions.elementToBeClickable(by));
+        logger.debug(String.format("Wait for element %s to be clickable", by.toString()));
     }
 }
