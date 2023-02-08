@@ -1,4 +1,4 @@
-package com.epam.qavn.core.DeviceManager;
+package com.epam.qavn.objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,17 +7,17 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 @JsonPropertyOrder({ "name", "platformName", "platformVersion"})
-public class Device {
+public class DeviceInformation {
 
     private String name;
     private String platformName;
     private String platformVersion;
 
-    public Device(JsonObject jsonObject) {
+    public DeviceInformation(JsonObject jsonObject) {
         Gson gson = new Gson();
-        this.name = gson.fromJson(jsonObject, Device.class).getName();
-        this.platformName = gson.fromJson(jsonObject, Device.class).getPlatformName();
-        this.platformVersion = gson.fromJson(jsonObject, Device.class).getPlatformVersion();
+        this.name = gson.fromJson(jsonObject, DeviceInformation.class).getName();
+        this.platformName = gson.fromJson(jsonObject, DeviceInformation.class).getPlatformName();
+        this.platformVersion = gson.fromJson(jsonObject, DeviceInformation.class).getPlatformVersion();
     }
 
     @JsonProperty("name")

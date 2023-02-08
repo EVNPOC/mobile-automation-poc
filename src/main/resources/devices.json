@@ -1,8 +1,8 @@
 {
-  "android_12": {
+  "android_11": {
     "name": "emulator-5554",
     "platformName": "Android",
-    "platformVersion": "12.0"
+    "platformVersion": "11.0"
   },
   "ios_10": {
     "name": "iPhone Simulator",
