@@ -1,6 +1,6 @@
-package com.epam.qavn.core.DeviceManager;
+package com.epam.qavn.core.driverManager;
 
-import io.appium.java_client.AppiumDriver;
+import com.epam.qavn.objects.DeviceInformation;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -9,9 +9,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 
-public class AndroidDevice {
+public class AndroidDriverManager extends DriverManager {
 
-    public AppiumDriver getDriver(Device device) {
+    @Override
+    public void createDriver(DeviceInformation device) {
         try {
             String appPath = Objects.requireNonNull(getClass().getClassLoader().getResource("NativeDemoApp-0.4.0.apk")).getPath();
             if (System.getProperty("os.name").toLowerCase().contains("windows")) {
@@ -25,9 +26,9 @@ public class AndroidDevice {
             desiredCapabilities.setCapability(MobileCapabilityType.APP, appPath);
             desiredCapabilities.setCapability("appWaitActivity", "*");
             URL url = new URL("http://127.0.0.1:4723/wd/hub");
-            return new AndroidDriver(url, desiredCapabilities);
+            driver = new AndroidDriver(url, desiredCapabilities);
         } catch (MalformedURLException urlException) {
-            return null;
+            driver = null;
         }
     }
 }
