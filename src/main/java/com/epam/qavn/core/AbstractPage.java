@@ -15,6 +15,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 
+import static com.epam.qavn.constant.DefaultConfig.SHORT_TIME_OUT;
 import static java.time.Duration.ofMillis;
 import static org.openqa.selenium.interactions.PointerInput.Kind.TOUCH;
 import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
@@ -24,19 +25,23 @@ public class AbstractPage {
     private final PointerInput FINGER = new PointerInput(TOUCH, "finger");
 
     public WebElement findElementBy(AppiumDriver driver, By by) {
-        waitUntilElementVisible(driver,by,Duration.ofSeconds(10));
+        waitUntilElementVisible(driver, by, Duration.ofSeconds(SHORT_TIME_OUT));
         return driver.findElement(by);
     }
+
     public List<WebElement> findElementsBy(AppiumDriver driver, By by) {
-        waitUntilElementVisible(driver,by,Duration.ofSeconds(10));
+        waitUntilElementVisible(driver, by, Duration.ofSeconds(SHORT_TIME_OUT));
         return driver.findElements(by);
     }
+
     public String getElementText(AppiumDriver driver, By by) {
-        return findElementBy(driver,by).getText();
+        return findElementBy(driver, by).getText();
     }
+
     public void inputText(AppiumDriver driver, By by, String text) {
         findElementBy(driver, by).sendKeys(text);
     }
+
     public void tapCenterOf(AppiumDriver driver, WebElement element, Duration duration) {
         Point point = getCenter(element);
         Sequence tap = new Sequence(FINGER, 1)
