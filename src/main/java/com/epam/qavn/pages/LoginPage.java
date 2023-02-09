@@ -19,13 +19,18 @@ public class LoginPage extends AbstractPage {
     private final By btnLogin = AppiumBy.accessibilityId("button-LOGIN");
     private final By lblEmailErrorMessage = AppiumBy.xpath("//android.view.ViewGroup[./android.widget.EditText[@content-desc='input-email']]/following-sibling::android.widget.TextView[1]");
     private final By lblPasswordErrorMessage = AppiumBy.xpath("//android.view.ViewGroup[./android.widget.EditText[@content-desc='input-password']]/following-sibling::android.widget.TextView[1]");
+    private final By lblSuccessMessage = AppiumBy.id("android:id/message");
 
     public LoginPage login(AppiumDriver driver, String email, String password) {
-        tapCenterOf(driver, findElementBy(driver, menuLogin), Duration.ofMillis(SHORT_PRESS_TIME));
         waitUntilElementVisible(driver, txtEmail, Duration.ofSeconds(SHORT_TIME_OUT));
         inputText(driver, txtEmail, email);
         inputText(driver, txtPassword, password);
         tapCenterOf(driver, findElementBy(driver, btnLogin), Duration.ofMillis(SHORT_PRESS_TIME));
+        return this;
+    }
+
+    public LoginPage tapLoginMenu(AppiumDriver driver) {
+        tapCenterOf(driver, findElementBy(driver, menuLogin), Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
     }
 
@@ -46,4 +51,9 @@ public class LoginPage extends AbstractPage {
     public String getPasswordErrorMessage(AppiumDriver driver) {
         return getElementText(driver, lblPasswordErrorMessage);
     }
+
+    public String getSuccessMessage(AppiumDriver driver) {
+        return getElementText(driver, lblSuccessMessage);
+    }
+
 }
