@@ -10,7 +10,7 @@ public class LoginTests extends AbstractTest {
 
     @Test
     public void invalidLoginTest() {
-        loginPage.clickLoginMenu(driver)
+        loginPage.tapLoginMenu(driver)
                 .loginWithEmptyAccount(driver);
         Assert.assertEquals(loginPage.getEmailErrorMessage(driver), "Please enter a valid email address");
         Assert.assertEquals(loginPage.getPasswordErrorMessage(driver), "Please enter at least 8 characters");
@@ -18,7 +18,7 @@ public class LoginTests extends AbstractTest {
 
     @Test
     public void validLoginTest() {
-        loginPage.clickLoginMenu(driver)
+        loginPage.tapLoginMenu(driver)
                 .loginWithValidAccount(driver);
         Assert.assertEquals(loginPage.getSuccessMessage(driver), "You are logged in!");
     }

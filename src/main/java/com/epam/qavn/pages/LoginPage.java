@@ -29,7 +29,7 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    public LoginPage clickLoginMenu(AppiumDriver driver) {
+    public LoginPage tapLoginMenu(AppiumDriver driver) {
         tapCenterOf(driver, findElementBy(driver, menuLogin), Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
     }
