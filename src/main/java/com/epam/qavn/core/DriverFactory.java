@@ -8,6 +8,8 @@ import com.epam.qavn.objects.DeviceInformation;
 import com.epam.qavn.utils.JsonReader;
 import com.google.gson.JsonObject;
 import io.appium.java_client.AppiumDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Platform;
 
 public class DriverFactory {
@@ -16,9 +18,11 @@ public class DriverFactory {
     private String deviceSourcePath = "devices.json";
     private String unknownPlatformMessage = "Unknown Platform! please use ANDROID or IOS only";
     private Platform platform;
+    private Logger logger;
 
     public DriverFactory() {
         threadDriver = new ThreadLocal<>();
+        logger = LogManager.getLogger();
     }
 
     public void setDriver(String deviceName) throws UnknownPlatformException {
@@ -38,6 +42,7 @@ public class DriverFactory {
                 driverManager = new IOSDriverManager();
                 break;
             default:
+                logger.error(unknownPlatformMessage);
                 throw new UnknownPlatformException(unknownPlatformMessage);
         }
         threadDriver.set(driverManager.getDriver(deviceInfo));
@@ -50,5 +55,6 @@ public class DriverFactory {
     public void removeDriver() {
         getDriver().quit();
         threadDriver.remove();
+        logger.info("Quit driver session and remove thread variable");
     }
 }
