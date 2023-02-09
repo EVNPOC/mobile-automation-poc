@@ -38,6 +38,10 @@ public class AbstractPage {
         return findElementBy(driver, by).getText();
     }
 
+    public String getElementAttribute(WebElement element, String attribute) {
+        return element.getAttribute(attribute);
+    }
+
     public void inputText(AppiumDriver driver, By by, String text) {
         findElementBy(driver, by).sendKeys(text);
     }
