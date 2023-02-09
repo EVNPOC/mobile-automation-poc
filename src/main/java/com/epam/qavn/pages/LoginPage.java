@@ -55,4 +55,5 @@ public class LoginPage extends AbstractPage {
     public String getSuccessMessage(AppiumDriver driver) {
         return getElementText(driver, lblSuccessMessage);
     }
+
 }
