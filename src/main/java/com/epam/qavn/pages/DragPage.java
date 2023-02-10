@@ -9,24 +9,29 @@ import org.openqa.selenium.WebElement;
 import java.time.Duration;
 import java.util.Random;
 
-import static com.epam.qavn.constant.DefaultConfig.SHORT_PRESS_TIME;
+import static com.epam.qavn.constant.CONFIG.SHORT_PRESS_TIME;
 
 public class DragPage extends AbstractPage {
+    private AppiumDriver driver;
     private final By menuDrag = AppiumBy.accessibilityId("Drag");
     private final By lstDragItems = AppiumBy.xpath("//android.view.ViewGroup[contains(@content-desc,'drag')]");
 
-    public DragPage tapDragMenu(AppiumDriver driver) {
+    public DragPage(AppiumDriver driver) {
+        this.driver = driver;
+    }
+
+    public DragPage tapDragMenu() {
         tapCenterOf(driver, findElementBy(driver, menuDrag), Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
     }
 
-    public WebElement getRandomDragElement(AppiumDriver driver) {
+    public WebElement getRandomDragElement() {
         Random random = new Random();
         return findElementsBy(driver, lstDragItems)
                 .get(random.nextInt(findElementsBy(driver, lstDragItems).size() - 1));
     }
 
-    public WebElement getDestinationElement(AppiumDriver driver, WebElement element) {
+    public WebElement getDestinationElement(WebElement element) {
         String desLocator = getElementAttribute(element, "content-desc").replace("drag", "drop");
         return findElementBy(driver, AppiumBy.accessibilityId(desLocator));
     }

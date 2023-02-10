@@ -17,7 +17,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 
-import static com.epam.qavn.constant.DefaultConfig.SHORT_TIME_OUT;
+import static com.epam.qavn.constant.CONFIG.SHORT_TIME_OUT;
 import static java.time.Duration.ofMillis;
 import static org.openqa.selenium.interactions.PointerInput.Kind.TOUCH;
 import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
