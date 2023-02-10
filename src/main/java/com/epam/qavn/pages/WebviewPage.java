@@ -22,17 +22,13 @@ public class WebviewPage extends AbstractPage {
         this.driver = driver;
     }
 
-    private WebElement findElementBy(By by) {
-        return super.findElementBy(driver, by);
-    }
-
     public WebviewPage tapWebviewMenu() {
-        tapCenterOf(driver, findElementBy(menuLogin), Duration.ofMillis(PAGE_LOAD_TIME));
+        tapCenterOf(driver, findElementBy(driver, menuLogin), Duration.ofMillis(PAGE_LOAD_TIME));
         return this;
     }
 
     public GettingStartedPage tapGettingStartedButton() {
-        tapCenterOf(driver, findElementBy(btnGetStarted), Duration.ofMillis(SHORT_PRESS_TIME));
+        tapCenterOf(driver, findElementBy(driver, btnGetStarted), Duration.ofMillis(SHORT_PRESS_TIME));
         return new GettingStartedPage(driver);
     }
 
