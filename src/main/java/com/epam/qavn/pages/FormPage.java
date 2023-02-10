@@ -29,12 +29,8 @@ public class FormPage extends AbstractPage {
         this.driver = driver;
     }
 
-    private WebElement findElementBy(By by) {
-        return super.findElementBy(driver, by);
-    }
-
     public FormPage tapFormsMenu() {
-        tapCenterOf(driver, findElementBy(menuForms), Duration.ofMillis(SHORT_PRESS_TIME));
+        tapCenterOf(driver, driver.findElement(menuForms), Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
     }
 
@@ -46,14 +42,14 @@ public class FormPage extends AbstractPage {
     }
 
     public FormPage inputTextField(String text) {
-        WebElement inputFieldElement = findElementBy(inputField);
+        WebElement inputFieldElement = driver.findElement(inputField);
         waitUntilElementClickable(driver, inputFieldElement, Duration.ofMillis(ELEMENT_LOAD_TIME));
         inputFieldElement.sendKeys(text);
         return this;
     }
 
     public FormPage switchToggle(boolean enable) {
-        WebElement switchElement = findElementBy(btnSwitch);
+        WebElement switchElement = driver.findElement(btnSwitch);
         waitUntilElementClickable(driver, switchElement, Duration.ofMillis(ELEMENT_LOAD_TIME));
         //when switch is ON, switch text is 'switch to turn OFF'
         boolean isSwitchOn = getElementText(driver, txtSwitch).contains("OFF");
@@ -64,10 +60,10 @@ public class FormPage extends AbstractPage {
     }
 
     public FormPage selectDropdown(FormDropdown dropdownValue) {
-        tapCenterOf(driver, findElementBy(dropdown), Duration.ofMillis(SHORT_PRESS_TIME));
+        tapCenterOf(driver, driver.findElement(dropdown), Duration.ofMillis(SHORT_PRESS_TIME));
         waitUntilElementVisible(driver, dropdownPanel, Duration.ofMillis(ELEMENT_LOAD_TIME));
 
-        WebElement dropdownOptionBy = findElementBy(AppiumBy.xpath(
+        WebElement dropdownOptionBy = driver.findElement(AppiumBy.xpath(
                 String.format(dropdownOptionXpath, dropdownValue.getValue())));
         tapCenterOf(driver, dropdownOptionBy, Duration.ofMillis(SHORT_PRESS_TIME));
 
@@ -75,14 +71,14 @@ public class FormPage extends AbstractPage {
     }
 
     public FormPage tapButtonActive() {
-        WebElement activeButton = findElementBy(btnActive);
+        WebElement activeButton = driver.findElement(btnActive);
         waitUntilElementClickable(driver, activeButton, Duration.ofMillis(ELEMENT_LOAD_TIME));
         tapCenterOf(driver, activeButton, Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
     }
 
     public boolean isActiveMessageDisplayed() {
-        return findElementBy(activeMessage).isDisplayed();
+        return driver.findElement(activeMessage).isDisplayed();
     }
 
     public enum FormDropdown {

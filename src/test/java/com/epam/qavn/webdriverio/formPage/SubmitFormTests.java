@@ -12,9 +12,10 @@ public class SubmitFormTests extends AbstractTest {
     @Test
     public void activeFormTest() {
         boolean messageIsDisplayed = formPage
-                .fillForm("this is text", true, FormPage.FormDropdown.APPIUM)
+                .fillForm("This is text", true, FormPage.FormDropdown.APPIUM)
                 .tapButtonActive()
                 .isActiveMessageDisplayed();
         Assert.assertTrue(messageIsDisplayed, "Active message is not displayed");
     }
+
 }
