@@ -4,7 +4,6 @@ import com.epam.qavn.core.AbstractPage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class GettingStartedPage extends AbstractPage {
 
@@ -15,12 +14,8 @@ public class GettingStartedPage extends AbstractPage {
         this.driver = driver;
     }
 
-    private WebElement findElementBy(By by) {
-        return super.findElementBy(driver, by);
-    }
-
     public boolean isGettingStartedPageDisplayed() {
-        return findElementBy(gettingStartedTitle).isDisplayed();
+        return findElementBy(driver, gettingStartedTitle).isDisplayed();
     }
 
 }
