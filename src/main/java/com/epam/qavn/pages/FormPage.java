@@ -30,7 +30,7 @@ public class FormPage extends AbstractPage {
     }
 
     public FormPage tapFormsMenu() {
-        tapCenterOf(driver, driver.findElement(menuForms), Duration.ofMillis(SHORT_PRESS_TIME));
+        tapCenterOf(driver, findElementBy(driver, menuForms), Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
     }
 
@@ -42,14 +42,14 @@ public class FormPage extends AbstractPage {
     }
 
     public FormPage inputTextField(String text) {
-        WebElement inputFieldElement = driver.findElement(inputField);
+        WebElement inputFieldElement = findElementBy(driver, inputField);
         waitUntilElementClickable(driver, inputFieldElement, Duration.ofMillis(ELEMENT_LOAD_TIME));
         inputFieldElement.sendKeys(text);
         return this;
     }
 
     public FormPage switchToggle(boolean enable) {
-        WebElement switchElement = driver.findElement(btnSwitch);
+        WebElement switchElement = findElementBy(driver, btnSwitch);
         waitUntilElementClickable(driver, switchElement, Duration.ofMillis(ELEMENT_LOAD_TIME));
         //when switch is ON, switch text is 'switch to turn OFF'
         boolean isSwitchOn = getElementText(driver, txtSwitch).contains("OFF");
@@ -63,7 +63,7 @@ public class FormPage extends AbstractPage {
         tapCenterOf(driver, driver.findElement(dropdown), Duration.ofMillis(SHORT_PRESS_TIME));
         waitUntilElementVisible(driver, dropdownPanel, Duration.ofMillis(ELEMENT_LOAD_TIME));
 
-        WebElement dropdownOptionBy = driver.findElement(AppiumBy.xpath(
+        WebElement dropdownOptionBy = findElementBy(driver, AppiumBy.xpath(
                 String.format(dropdownOptionXpath, dropdownValue.getValue())));
         tapCenterOf(driver, dropdownOptionBy, Duration.ofMillis(SHORT_PRESS_TIME));
 
@@ -71,7 +71,7 @@ public class FormPage extends AbstractPage {
     }
 
     public FormPage tapButtonActive() {
-        WebElement activeButton = driver.findElement(btnActive);
+        WebElement activeButton = findElementBy(driver, btnActive);
         waitUntilElementClickable(driver, activeButton, Duration.ofMillis(ELEMENT_LOAD_TIME));
         tapCenterOf(driver, activeButton, Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
