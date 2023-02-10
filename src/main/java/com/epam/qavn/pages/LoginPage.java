@@ -20,6 +20,7 @@ public class LoginPage extends AbstractPage {
     private final By lblEmailErrorMessage = AppiumBy.xpath("//android.view.ViewGroup[./android.widget.EditText[@content-desc='input-email']]/following-sibling::android.widget.TextView[1]");
     private final By lblPasswordErrorMessage = AppiumBy.xpath("//android.view.ViewGroup[./android.widget.EditText[@content-desc='input-password']]/following-sibling::android.widget.TextView[1]");
     private final By lblSuccessMessage = AppiumBy.id("android:id/message");
+    private final By btnOk = AppiumBy.id("android:id/button1");
 
     public LoginPage login(AppiumDriver driver, String email, String password) {
         waitUntilElementVisible(driver, txtEmail, Duration.ofSeconds(SHORT_TIME_OUT));
@@ -56,4 +57,8 @@ public class LoginPage extends AbstractPage {
         return getElementText(driver, lblSuccessMessage);
     }
 
+    public LoginPage tapOkButton(AppiumDriver driver) {
+        tapCenterOf(driver, findElementBy(driver, btnOk), Duration.ofMillis(SHORT_PRESS_TIME));
+        return this;
+    }
 }
