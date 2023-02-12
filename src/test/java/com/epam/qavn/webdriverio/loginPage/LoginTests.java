@@ -27,5 +27,6 @@ public class LoginTests extends AbstractTest {
         loginPage.tapLoginMenu()
                 .loginWithValidAccount();
         Assert.assertEquals(loginPage.getSuccessMessage(), "You are logged in!");
+        loginPage.tapOkButton();
     }
 }

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.time.Duration;
 import java.util.Random;
 
+import static com.epam.qavn.constant.CONFIG.SHORT_DRAG_DROP_TIME;
 import static com.epam.qavn.constant.CONFIG.SHORT_PRESS_TIME;
 
 public class DragPage extends AbstractPage {
@@ -34,5 +35,10 @@ public class DragPage extends AbstractPage {
     public WebElement getDestinationElement(WebElement element) {
         String desLocator = getElementAttribute(element, "content-desc").replace("drag", "drop");
         return findElementBy(driver, AppiumBy.accessibilityId(desLocator));
+    }
+
+    public DragPage dragBetweenElements(WebElement start, WebElement end){
+        dragAndDrop(driver,start,end,Duration.ofMillis(SHORT_DRAG_DROP_TIME));
+        return this;
     }
 }

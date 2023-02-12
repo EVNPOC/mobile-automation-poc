@@ -24,7 +24,7 @@ public class DragTests extends AbstractTest {
         dragPage.tapDragMenu();
         WebElement dragElement = dragPage.getRandomDragElement();
         WebElement dropElement = dragPage.getDestinationElement(dragElement);
-        dragPage.dragAndDrop(driver, dragElement, dropElement, Duration.ofMillis(SHORT_DRAG_DROP_TIME));
+        dragPage.dragBetweenElements(dragElement, dropElement);
         Assert.assertFalse(dragElement.isDisplayed());
         Assert.assertFalse(dropElement.isDisplayed());
     }
