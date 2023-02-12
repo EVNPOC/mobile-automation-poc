@@ -37,8 +37,8 @@ public class DragPage extends AbstractPage {
         return findElementBy(driver, AppiumBy.accessibilityId(desLocator));
     }
 
-    public DragPage dragBetweenElements(WebElement start, WebElement end){
-        dragAndDrop(driver,start,end,Duration.ofMillis(SHORT_DRAG_DROP_TIME));
+    public DragPage dragBetweenElements(WebElement start, WebElement end) {
+        dragAndDrop(driver, start, end, Duration.ofMillis(SHORT_DRAG_DROP_TIME));
         return this;
     }
 }

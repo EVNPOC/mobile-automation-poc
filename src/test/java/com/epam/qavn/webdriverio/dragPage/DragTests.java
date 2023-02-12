@@ -7,10 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
-import static com.epam.qavn.constant.CONFIG.SHORT_DRAG_DROP_TIME;
-
 public class DragTests extends AbstractTest {
     DragPage dragPage;
 

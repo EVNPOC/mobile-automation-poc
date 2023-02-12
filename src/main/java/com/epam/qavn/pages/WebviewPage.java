@@ -15,7 +15,7 @@ public class WebviewPage extends AbstractPage {
 
     private final AppiumDriver driver;
 
-    private By menuWebView = AppiumBy.accessibilityId("Webview");
+    private By menuLogin = AppiumBy.accessibilityId("Webview");
     private By btnGetStarted = AppiumBy.accessibilityId("Get Started");
 
     public WebviewPage(AppiumDriver driver) {
@@ -23,7 +23,7 @@ public class WebviewPage extends AbstractPage {
     }
 
     public WebviewPage tapWebviewMenu() {
-        tapCenterOf(driver, findElementBy(driver, menuWebView), Duration.ofMillis(PAGE_LOAD_TIME));
+        tapCenterOf(driver, findElementBy(driver, menuLogin), Duration.ofMillis(PAGE_LOAD_TIME));
         return this;
     }
 
