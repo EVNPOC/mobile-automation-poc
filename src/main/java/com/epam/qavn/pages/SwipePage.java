@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.time.Duration;
 import java.util.List;
 
-import static com.epam.qavn.constant.DefaultConfig.SHORT_PRESS_TIME;
+import static com.epam.qavn.constant.CONFIG.SHORT_PRESS_TIME;
 
 public class SwipePage extends AbstractPage {
     private AppiumDriver driver;
