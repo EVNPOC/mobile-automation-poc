@@ -26,5 +26,6 @@ public class DragTests extends AbstractTest {
         dragPage.dragBetweenElements(dragElement, dropElement);
         softAssert.assertFalse(dragElement.isDisplayed());
         softAssert.assertFalse(dropElement.isDisplayed());
+        softAssert.assertAll();
     }
 }

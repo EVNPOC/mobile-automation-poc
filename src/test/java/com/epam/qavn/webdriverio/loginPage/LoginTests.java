@@ -25,6 +25,7 @@ public class LoginTests extends AbstractTest {
         loginPage.loginWithEmptyAccount();
         softAssert.assertEquals(loginPage.getEmailErrorMessage(), "Please enter a valid email address");
         softAssert.assertEquals(loginPage.getPasswordErrorMessage(), "Please enter at least 8 characters");
+        softAssert.assertAll();
     }
 
     @Test(groups = {"needClosePopup"})
