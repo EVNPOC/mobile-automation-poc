@@ -7,7 +7,8 @@ import org.openqa.selenium.By;
 
 import java.time.Duration;
 
-import static com.epam.qavn.constant.DefaultConfig.*;
+import static com.epam.qavn.constant.CONFIG.*;
+
 
 public class WebviewPage extends AbstractPage {
 
