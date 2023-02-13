@@ -18,11 +18,11 @@ public class SwipeTests extends AbstractTest {
     @BeforeClass
     public void initData() {
         swipePage = new SwipePage(driver);
+        swipePage.tapSwipeMenu();
     }
 
     @Test
     public void swipeTest() {
-        swipePage.tapSwipeMenu();
         List<WebElement> lstCards = swipePage.getAllCards();
         swipePage.doSwipeHorizontalFromRight(driver, lstCards.get(0), Duration.ofMillis(SHORT_DRAG_DROP_TIME));
         Assert.assertTrue(swipePage.getSecondCardIcon().isDisplayed());
