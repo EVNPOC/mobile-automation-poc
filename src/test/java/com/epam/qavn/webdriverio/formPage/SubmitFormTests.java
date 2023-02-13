@@ -3,6 +3,7 @@ package com.epam.qavn.webdriverio.formPage;
 import com.epam.qavn.core.AbstractTest;
 import com.epam.qavn.pages.FormPage;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -23,6 +24,10 @@ public class SubmitFormTests extends AbstractTest {
                 .tapButtonActive()
                 .isActiveMessagePopupDisplayed();
         Assert.assertTrue(messageIsDisplayed, "Active message is not displayed");
+    }
+
+    @AfterMethod
+    public void closePopup() {
         formPage.tapButtonOkOnMessagePopup();
     }
 
