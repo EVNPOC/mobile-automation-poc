@@ -1,6 +1,7 @@
 package com.epam.qavn.core;
 
 import com.epam.qavn.exception.UnknownPlatformException;
+import com.epam.qavn.utils.AppiumServer;
 import io.appium.java_client.AppiumDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,11 +11,13 @@ public abstract class AbstractTest {
 
     protected Logger logger = LogManager.getLogger();
     protected static AppiumDriver driver;
+    private final AppiumServer appiumRunner = new AppiumServer();
     private final DriverFactory driverFactory = new DriverFactory();
 
     @BeforeSuite
     public void startServerAndDevice() {
         logger.info("Before suite: start Appium server and launch Emulator");
+        appiumRunner.start();
     }
 
     @Parameters("device")
@@ -32,5 +35,6 @@ public abstract class AbstractTest {
     @AfterSuite
     public void shutdownServerAndDevice() {
         logger.info("After suite: shutdown Appium server and close Emulator");
+        appiumRunner.stop();
     }
 }

@@ -4,30 +4,38 @@ import com.epam.qavn.core.AbstractPage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
 
-import static com.epam.qavn.constant.CONFIG.PAGE_LOAD_TIME;
-import static com.epam.qavn.constant.CONFIG.SHORT_PRESS_TIME;
+import static com.epam.qavn.constant.CONFIG.*;
+
 
 public class WebviewPage extends AbstractPage {
 
     private final AppiumDriver driver;
 
-    private By menuLogin = AppiumBy.accessibilityId("Webview");
+    private By menuWebview = AppiumBy.accessibilityId("Webview");
     private By btnGetStarted = AppiumBy.accessibilityId("Get Started");
+
+    private By logo = AppiumBy.xpath("//android.view.View[@content-desc='WebdriverIO']/android.view.View/android.widget.Image");
 
     public WebviewPage(AppiumDriver driver) {
         this.driver = driver;
     }
 
     public WebviewPage tapWebviewMenu() {
-        tapCenterOf(driver, findElementBy(driver, menuLogin), Duration.ofMillis(PAGE_LOAD_TIME));
+        tapCenterOf(driver, findElementBy(driver, menuWebview), Duration.ofMillis(SHORT_PRESS_TIME));
+        waitUntilElementVisible(driver, logo, Duration.ofMillis(PAGE_LOAD_TIME));
+        return this;
+    }
+
+    public WebviewPage scrollDownABit() {
+        scrollDown(driver, Duration.ofMillis(SHORT_DRAG_DROP_TIME));
         return this;
     }
 
     public GettingStartedPage tapGettingStartedButton() {
+        waitUntilElementClickable(driver, findElementBy(driver, btnGetStarted), Duration.ofMillis(PAGE_LOAD_TIME));
         tapCenterOf(driver, findElementBy(driver, btnGetStarted), Duration.ofMillis(SHORT_PRESS_TIME));
         return new GettingStartedPage(driver);
     }

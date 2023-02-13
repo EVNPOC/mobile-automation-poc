@@ -23,7 +23,7 @@ public class FormPage extends AbstractPage {
     private By btnActive = AppiumBy.accessibilityId("button-Active");
     private By activeMessage = AppiumBy.accessibilityId("android:id/message");
     private By btnOK = AppiumBy.accessibilityId("android:id/button1");
-    private String dropdownOptionXpath = "//android.widget.CheckedTextView[text()='%s']";
+    private String dropdownOptionXpath = "//android.widget.CheckedTextView[@text='%s']";
 
     public FormPage(AppiumDriver driver) {
         this.driver = driver;
@@ -44,7 +44,7 @@ public class FormPage extends AbstractPage {
     public FormPage inputTextField(String text) {
         WebElement inputFieldElement = findElementBy(driver, inputField);
         waitUntilElementClickable(driver, inputFieldElement, Duration.ofMillis(ELEMENT_LOAD_TIME));
-        inputFieldElement.sendKeys(text);
+        inputText(driver, inputField, text);
         return this;
     }
 
@@ -78,7 +78,7 @@ public class FormPage extends AbstractPage {
     }
 
     public boolean isActiveMessageDisplayed() {
-        return driver.findElement(activeMessage).isDisplayed();
+        return findElementBy(driver, activeMessage).isDisplayed();
     }
 
     public enum FormDropdown {
