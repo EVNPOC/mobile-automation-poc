@@ -11,13 +11,12 @@ public abstract class AbstractTest {
 
     protected Logger logger = LogManager.getLogger();
     protected static AppiumDriver driver;
-    private final AppiumServer appiumRunner = new AppiumServer();
     private final DriverFactory driverFactory = new DriverFactory();
 
     @BeforeSuite
     public void startServerAndDevice() {
         logger.info("Before suite: start Appium server and launch Emulator");
-        appiumRunner.start();
+        AppiumServer.getInstance().start();
     }
 
     @Parameters("device")
@@ -35,6 +34,6 @@ public abstract class AbstractTest {
     @AfterSuite
     public void shutdownServerAndDevice() {
         logger.info("After suite: shutdown Appium server and close Emulator");
-        appiumRunner.stop();
+        AppiumServer.getInstance().stop();
     }
 }
