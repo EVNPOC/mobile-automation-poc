@@ -8,8 +8,8 @@ import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
 
-import static com.epam.qavn.constant.DefaultConfig.ELEMENT_LOAD_TIME;
-import static com.epam.qavn.constant.DefaultConfig.SHORT_PRESS_TIME;
+import static com.epam.qavn.constant.CONFIG.ELEMENT_LOAD_TIME;
+import static com.epam.qavn.constant.CONFIG.SHORT_PRESS_TIME;
 
 public class FormPage extends AbstractPage {
 

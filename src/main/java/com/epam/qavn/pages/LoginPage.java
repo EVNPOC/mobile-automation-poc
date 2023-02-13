@@ -7,10 +7,11 @@ import org.openqa.selenium.By;
 
 import java.time.Duration;
 
-import static com.epam.qavn.constant.DefaultConfig.SHORT_PRESS_TIME;
-import static com.epam.qavn.constant.DefaultConfig.SHORT_TIME_OUT;
+import static com.epam.qavn.constant.CONFIG.SHORT_PRESS_TIME;
+import static com.epam.qavn.constant.CONFIG.SHORT_TIME_OUT;
 
 public class LoginPage extends AbstractPage {
+    private AppiumDriver driver;
     private static final String VALID_EMAIL = "abc@gmail.com";
     private static final String VALID_PASSWORD = "12345678";
     private final By menuLogin = AppiumBy.accessibilityId("Login");
@@ -22,7 +23,11 @@ public class LoginPage extends AbstractPage {
     private final By lblSuccessMessage = AppiumBy.id("android:id/message");
     private final By btnOk = AppiumBy.id("android:id/button1");
 
-    public LoginPage login(AppiumDriver driver, String email, String password) {
+    public LoginPage(AppiumDriver driver) {
+        this.driver = driver;
+    }
+
+    public LoginPage login(String email, String password) {
         waitUntilElementVisible(driver, txtEmail, Duration.ofSeconds(SHORT_TIME_OUT));
         inputText(driver, txtEmail, email);
         inputText(driver, txtPassword, password);
@@ -30,34 +35,34 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    public LoginPage tapLoginMenu(AppiumDriver driver) {
+    public LoginPage tapLoginMenu() {
         tapCenterOf(driver, findElementBy(driver, menuLogin), Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
     }
 
-    public LoginPage loginWithEmptyAccount(AppiumDriver driver) {
-        login(driver, "", "");
+    public LoginPage loginWithEmptyAccount() {
+        login("", "");
         return this;
     }
 
-    public LoginPage loginWithValidAccount(AppiumDriver driver) {
-        login(driver, VALID_EMAIL, VALID_PASSWORD);
+    public LoginPage loginWithValidAccount() {
+        login(VALID_EMAIL, VALID_PASSWORD);
         return this;
     }
 
-    public String getEmailErrorMessage(AppiumDriver driver) {
+    public String getEmailErrorMessage() {
         return getElementText(driver, lblEmailErrorMessage);
     }
 
-    public String getPasswordErrorMessage(AppiumDriver driver) {
+    public String getPasswordErrorMessage() {
         return getElementText(driver, lblPasswordErrorMessage);
     }
 
-    public String getSuccessMessage(AppiumDriver driver) {
+    public String getSuccessMessage() {
         return getElementText(driver, lblSuccessMessage);
     }
 
-    public LoginPage tapOkButton(AppiumDriver driver) {
+    public LoginPage tapOkButton() {
         tapCenterOf(driver, findElementBy(driver, btnOk), Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
     }
