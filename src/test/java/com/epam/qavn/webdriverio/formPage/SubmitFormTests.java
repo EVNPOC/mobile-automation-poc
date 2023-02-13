@@ -21,8 +21,9 @@ public class SubmitFormTests extends AbstractTest {
                 .tapFormsMenu()
                 .fillForm("This is text", true, FormPage.FormDropdown.APPIUM)
                 .tapButtonActive()
-                .isActiveMessageDisplayed();
+                .isActiveMessagePopupDisplayed();
         Assert.assertTrue(messageIsDisplayed, "Active message is not displayed");
+        formPage.tapButtonOk();
     }
 
 }

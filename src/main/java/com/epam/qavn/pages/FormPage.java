@@ -21,8 +21,8 @@ public class FormPage extends AbstractPage {
     private By dropdown = AppiumBy.accessibilityId("Dropdown");
     private By dropdownPanel = AppiumBy.id("com.wdiodemoapp:id/select_dialog_listview");
     private By btnActive = AppiumBy.accessibilityId("button-Active");
-    private By activeMessage = AppiumBy.accessibilityId("android:id/message");
-    private By btnOK = AppiumBy.accessibilityId("android:id/button1");
+    private By activeMessage = AppiumBy.id("android:id/message");
+    private By btnOK = AppiumBy.id("android:id/button1");
     private String dropdownOptionXpath = "//android.widget.CheckedTextView[@text='%s']";
 
     public FormPage(AppiumDriver driver) {
@@ -77,7 +77,14 @@ public class FormPage extends AbstractPage {
         return this;
     }
 
-    public boolean isActiveMessageDisplayed() {
+    public FormPage tapButtonOk() {
+        WebElement okButton = findElementBy(driver, btnOK);
+        waitUntilElementClickable(driver, okButton, Duration.ofMillis(ELEMENT_LOAD_TIME));
+        tapCenterOf(driver, okButton, Duration.ofMillis(SHORT_PRESS_TIME));
+        return this;
+    }
+
+    public boolean isActiveMessagePopupDisplayed() {
         return findElementBy(driver, activeMessage).isDisplayed();
     }
 
