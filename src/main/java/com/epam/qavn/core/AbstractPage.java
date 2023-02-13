@@ -78,9 +78,9 @@ public class AbstractPage {
 
     protected void scrollDown(AppiumDriver driver, Duration duration) {
         //Find start_y point which is at bottom side of screen.
-        int start_y = (int) (driver.manage().window().getSize().height * 0.80);
+        int start_y = driver.manage().window().getSize().height / 2;
         //Find end_y point which is at top side of screen.
-        int end_y = (int) (driver.manage().window().getSize().height * 0.20);
+        int end_y = driver.manage().window().getPosition().y;
 
         int x = driver.manage().window().getSize().width / 2;
 
