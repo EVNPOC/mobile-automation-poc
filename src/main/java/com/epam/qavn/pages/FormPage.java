@@ -77,7 +77,7 @@ public class FormPage extends AbstractPage {
         return this;
     }
 
-    public FormPage tapButtonOk() {
+    public FormPage tapButtonOkOnMessagePopup() {
         WebElement okButton = findElementBy(driver, btnOK);
         waitUntilElementClickable(driver, okButton, Duration.ofMillis(ELEMENT_LOAD_TIME));
         tapCenterOf(driver, okButton, Duration.ofMillis(SHORT_PRESS_TIME));

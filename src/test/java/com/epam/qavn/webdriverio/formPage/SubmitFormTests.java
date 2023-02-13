@@ -23,7 +23,7 @@ public class SubmitFormTests extends AbstractTest {
                 .tapButtonActive()
                 .isActiveMessagePopupDisplayed();
         Assert.assertTrue(messageIsDisplayed, "Active message is not displayed");
-        formPage.tapButtonOk();
+        formPage.tapButtonOkOnMessagePopup();
     }
 
 }
