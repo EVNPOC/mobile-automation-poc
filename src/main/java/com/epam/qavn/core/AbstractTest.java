@@ -17,7 +17,7 @@ public abstract class AbstractTest {
     @BeforeSuite
     public void startServerAndDevice() {
         logger.info("Before suite: start Appium server and launch Emulator");
-        appiumRunner.startAppiumServer();
+        appiumRunner.start();
     }
 
     @Parameters("device")
@@ -35,6 +35,6 @@ public abstract class AbstractTest {
     @AfterSuite
     public void shutdownServerAndDevice() {
         logger.info("After suite: shutdown Appium server and close Emulator");
-        appiumRunner.stopServer();
+        appiumRunner.stop();
     }
 }

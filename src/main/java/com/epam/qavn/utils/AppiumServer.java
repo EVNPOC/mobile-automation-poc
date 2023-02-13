@@ -12,7 +12,7 @@ public class AppiumServer {
 
     private static AppiumDriverLocalService service;
 
-    public void startAppiumServer() {
+    public void start() {
         final AppiumServiceBuilder builder = new AppiumServiceBuilder()
                 .usingAnyFreePort()
                 .withIPAddress("0.0.0.0")
@@ -26,7 +26,7 @@ public class AppiumServer {
         service.start();
     }
 
-    public void stopServer() {
+    public void stop() {
         service.stop();
     }
 
