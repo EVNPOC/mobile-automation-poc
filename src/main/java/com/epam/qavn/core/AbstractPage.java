@@ -21,6 +21,7 @@ import static com.epam.qavn.constant.DefaultConfig.SHORT_TIME_OUT;
 import static java.time.Duration.ofMillis;
 import static org.openqa.selenium.interactions.PointerInput.Kind.TOUCH;
 import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
+import static org.openqa.selenium.interactions.PointerInput.MouseButton.MIDDLE;
 import static org.openqa.selenium.interactions.PointerInput.Origin.viewport;
 
 public class AbstractPage {
@@ -73,6 +74,22 @@ public class AbstractPage {
                 .addAction(FINGER.createPointerUp(LEFT.asArg()));
         driver.perform(Collections.singletonList(tap));
         logger.debug("Tap at point: " + point);
+    }
+
+    protected void scrollDown(AppiumDriver driver, Duration duration) {
+        //Find start_y point which is at bottom side of screen.
+        int start_y = (int) (driver.manage().window().getSize().height * 0.80);
+        //Find end_y point which is at top side of screen.
+        int end_y = (int) (driver.manage().window().getSize().height * 0.20);
+
+        int x = driver.manage().window().getSize().width / 2;
+
+        Sequence swipe = new Sequence(FINGER, 1)
+                .addAction(FINGER.createPointerMove(Duration.ofMillis(0), viewport(), x, start_y))
+                .addAction(FINGER.createPointerDown(MIDDLE.asArg()))
+                .addAction(FINGER.createPointerMove(duration, viewport(), x, end_y))
+                .addAction(FINGER.createPointerUp(LEFT.asArg()));
+        driver.perform(Collections.singletonList(swipe));
     }
 
     public void doSwipe(AppiumDriver driver, Point start, Point end, Duration duration) {

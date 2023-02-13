@@ -5,6 +5,10 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
+
+import static com.epam.qavn.constant.DefaultConfig.SHORT_DRAG_DROP_TIME;
+
 public class GettingStartedPage extends AbstractPage {
 
     private AppiumDriver driver;
