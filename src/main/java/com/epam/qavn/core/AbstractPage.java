@@ -88,7 +88,7 @@ public class AbstractPage {
                 .addAction(FINGER.createPointerMove(Duration.ofMillis(0), viewport(), x, start_y))
                 .addAction(FINGER.createPointerDown(MIDDLE.asArg()))
                 .addAction(FINGER.createPointerMove(duration, viewport(), x, end_y))
-                .addAction(FINGER.createPointerUp(LEFT.asArg()));
+                .addAction(FINGER.createPointerUp(MIDDLE.asArg()));
         driver.perform(Collections.singletonList(swipe));
     }
 

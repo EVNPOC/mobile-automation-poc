@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 public class GettingStartedPage extends AbstractPage {
 
     private AppiumDriver driver;
-    private By gettingStartedTitle = AppiumBy.xpath("//android.view.View[text()='Getting Started']");
+    private By gettingStartedTitle = AppiumBy.xpath("//android.view.View[@text='Getting Started']");
 
     public GettingStartedPage(AppiumDriver driver) {
         this.driver = driver;

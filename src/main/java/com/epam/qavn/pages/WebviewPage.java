@@ -17,12 +17,15 @@ public class WebviewPage extends AbstractPage {
     private By menuWebview = AppiumBy.accessibilityId("Webview");
     private By btnGetStarted = AppiumBy.accessibilityId("Get Started");
 
+    private By logo = AppiumBy.xpath("//android.view.View[@content-desc='WebdriverIO']/android.view.View/android.widget.Image");
+
     public WebviewPage(AppiumDriver driver) {
         this.driver = driver;
     }
 
     public WebviewPage tapWebviewMenu() {
         tapCenterOf(driver, findElementBy(driver, menuWebview), Duration.ofMillis(SHORT_PRESS_TIME));
+        waitUntilElementVisible(driver, logo, Duration.ofMillis(PAGE_LOAD_TIME));
         return this;
     }
 
