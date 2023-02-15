@@ -29,7 +29,6 @@ public class AppiumServer {
                 .withArgument(LOG_LEVEL, "info")
                 .withArgument(DEBUG_LOG_SPACING)
                 .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
-                // FYI: https://github.com/appium/java-client/blob/master/docs/v7-to-v8-migration-guide.md#appiumdriverlocalservice
                 .withArgument(GeneralServerFlag.BASEPATH, "/wd/hub/");
         service.set(AppiumDriverLocalService.buildService(builder));
         service.get().start();
