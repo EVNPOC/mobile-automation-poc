@@ -3,6 +3,7 @@ package com.epam.qavn.pages;
 import com.epam.qavn.core.AbstractPage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -22,11 +23,13 @@ public class SwipePage extends AbstractPage {
         this.driver = driver;
     }
 
+    @Step("Tap menu Swipe")
     public SwipePage tapSwipeMenu() {
         tapCenterOf(driver, findElementBy(driver, menuSwipe), Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
     }
 
+    @Step("Get all swipe cards")
     public List<WebElement> getAllCards() {
         return findElementsBy(driver, listCards);
     }

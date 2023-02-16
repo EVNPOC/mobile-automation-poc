@@ -2,6 +2,7 @@ package com.epam.qavn.webdriverio.formPage;
 
 import com.epam.qavn.core.AbstractTest;
 import com.epam.qavn.pages.FormPage;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -17,6 +18,7 @@ public class SubmitFormTests extends AbstractTest {
     }
 
     @Test
+    @Description("Verify input form then click button Active")
     public void activeFormTest() {
         boolean messageIsDisplayed = formPage
                 .tapFormsMenu()
