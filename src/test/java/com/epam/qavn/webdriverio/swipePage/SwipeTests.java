@@ -2,6 +2,7 @@ package com.epam.qavn.webdriverio.swipePage;
 
 import com.epam.qavn.core.AbstractTest;
 import com.epam.qavn.pages.SwipePage;
+import io.qameta.allure.Description;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -22,6 +23,7 @@ public class SwipeTests extends AbstractTest {
     }
 
     @Test
+    @Description("Verify swipe to second card then swipe back to first card")
     public void swipeTest() {
         List<WebElement> lstCards = swipePage.getAllCards();
         swipePage.doSwipeHorizontalFromRight(driver, lstCards.get(0), Duration.ofMillis(SHORT_DRAG_DROP_TIME));
