@@ -10,7 +10,7 @@
 
     <properties>
         <maven.compiler.version>3.8.1</maven.compiler.version>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <testng.version>7.7.0</testng.version>
         <appium.version>8.3.0</appium.version>
         <log4j.version>2.17.1</log4j.version>
