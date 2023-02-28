@@ -2,6 +2,7 @@ package com.epam.qavn.webdriverio.dragPage;
 
 import com.epam.qavn.core.AbstractTest;
 import com.epam.qavn.pages.DragPage;
+import io.qameta.allure.Description;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -20,6 +21,7 @@ public class DragTests extends AbstractTest {
     }
 
     @Test
+    @Description("Verify drag and drop with any card")
     public void dragTest() {
         WebElement dragElement = dragPage.getRandomDragElement();
         WebElement dropElement = dragPage.getDestinationElement(dragElement);

@@ -2,6 +2,7 @@ package com.epam.qavn.webdriverio.loginPage;
 
 import com.epam.qavn.core.AbstractTest;
 import com.epam.qavn.pages.LoginPage;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -21,6 +22,7 @@ public class LoginTests extends AbstractTest {
     }
 
     @Test
+    @Description("Verify login with empty username and password")
     public void invalidLoginTest() {
         loginPage.loginWithEmptyAccount();
         softAssert.assertEquals(loginPage.getEmailErrorMessage(), "Please enter a valid email address");
@@ -29,6 +31,7 @@ public class LoginTests extends AbstractTest {
     }
 
     @Test(groups = {"needClosePopup"})
+    @Description("Verify login with valid username and password")
     public void validLoginTest() {
         loginPage.loginWithValidAccount();
         Assert.assertEquals(loginPage.getSuccessMessage(), "You are logged in!");

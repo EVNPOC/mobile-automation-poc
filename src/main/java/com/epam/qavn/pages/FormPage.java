@@ -3,6 +3,7 @@ package com.epam.qavn.pages;
 import com.epam.qavn.core.AbstractPage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -29,11 +30,13 @@ public class FormPage extends AbstractPage {
         this.driver = driver;
     }
 
+    @Step("Tap menu Form")
     public FormPage tapFormsMenu() {
         tapCenterOf(driver, findElementBy(driver, menuForms), Duration.ofMillis(SHORT_PRESS_TIME));
         return this;
     }
 
+    @Step("Fill the form")
     public FormPage fillForm(String text, boolean enableSwitch, FormDropdown dropdown) {
         this.inputTextField(text)
                 .switchToggle(enableSwitch)
@@ -41,6 +44,7 @@ public class FormPage extends AbstractPage {
         return this;
     }
 
+    @Step("Input text field with text {0}")
     public FormPage inputTextField(String text) {
         WebElement inputFieldElement = findElementBy(driver, inputField);
         waitUntilElementClickable(driver, inputFieldElement, Duration.ofMillis(ELEMENT_LOAD_TIME));
@@ -48,6 +52,7 @@ public class FormPage extends AbstractPage {
         return this;
     }
 
+    @Step("Switch toggle on off")
     public FormPage switchToggle(boolean enable) {
         WebElement switchElement = findElementBy(driver, btnSwitch);
         waitUntilElementClickable(driver, switchElement, Duration.ofMillis(ELEMENT_LOAD_TIME));
@@ -59,6 +64,7 @@ public class FormPage extends AbstractPage {
         return this;
     }
 
+    @Step("Select dropdown with value {0}")
     public FormPage selectDropdown(FormDropdown dropdownValue) {
         tapCenterOf(driver, driver.findElement(dropdown), Duration.ofMillis(SHORT_PRESS_TIME));
         waitUntilElementVisible(driver, dropdownPanel, Duration.ofMillis(ELEMENT_LOAD_TIME));
@@ -70,6 +76,7 @@ public class FormPage extends AbstractPage {
         return this;
     }
 
+    @Step("Tap button Active")
     public FormPage tapButtonActive() {
         WebElement activeButton = findElementBy(driver, btnActive);
         waitUntilElementClickable(driver, activeButton, Duration.ofMillis(ELEMENT_LOAD_TIME));
@@ -77,6 +84,7 @@ public class FormPage extends AbstractPage {
         return this;
     }
 
+    @Step("Tap button Ok")
     public FormPage tapButtonOkOnMessagePopup() {
         WebElement okButton = findElementBy(driver, btnOK);
         waitUntilElementClickable(driver, okButton, Duration.ofMillis(ELEMENT_LOAD_TIME));
