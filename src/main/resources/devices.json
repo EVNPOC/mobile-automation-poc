@@ -1,6 +1,7 @@
 {
   "android_11": {
     "name": "emulator-5554",
+    "avdName": "Pixel_4_XL_API_30",
     "platformName": "Android",
     "platformVersion": "11.0"
   },
