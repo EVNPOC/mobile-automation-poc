@@ -6,16 +6,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-@JsonPropertyOrder({ "name", "platformName", "platformVersion"})
+@JsonPropertyOrder({"name", "avdName", "platformName", "platformVersion"})
 public class DeviceInformation {
 
     private String name;
+    private String avdName;
     private String platformName;
     private String platformVersion;
 
     public DeviceInformation(JsonObject jsonObject) {
         Gson gson = new Gson();
         this.name = gson.fromJson(jsonObject, DeviceInformation.class).getName();
+        this.avdName = gson.fromJson(jsonObject, DeviceInformation.class).getAvdName();
         this.platformName = gson.fromJson(jsonObject, DeviceInformation.class).getPlatformName();
         this.platformVersion = gson.fromJson(jsonObject, DeviceInformation.class).getPlatformVersion();
     }
@@ -24,6 +26,12 @@ public class DeviceInformation {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getName() {
         return name;
+    }
+
+    @JsonProperty("avdName")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getAvdName() {
+        return avdName;
     }
 
     @JsonProperty("platformName")
