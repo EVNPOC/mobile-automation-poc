@@ -7,6 +7,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.*;
 
+import java.io.IOException;
+
 public abstract class AbstractTest {
 
     protected Logger logger = LogManager.getLogger();
@@ -35,5 +37,14 @@ public abstract class AbstractTest {
     public void shutdownServerAndDevice() {
         logger.info("After suite: shutdown Appium server and close Emulator");
         AppiumServer.getInstance().stop();
+        closeEmulator();
+    }
+
+    public void closeEmulator() {
+        try {
+            Runtime.getRuntime().exec("adb -s emulator-5554 emu kill");
+        } catch (IOException e) {
+            logger.info("Close emulator failed!");
+        }
     }
 }
