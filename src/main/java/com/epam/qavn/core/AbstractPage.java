@@ -51,7 +51,9 @@ public class AbstractPage {
     }
 
     public void inputText(AppiumDriver driver, By by, String text) {
-        findElementBy(driver, by).sendKeys(text);
+        WebElement element = findElementBy(driver, by);
+        element.clear();
+        element.sendKeys(text);
         logger.debug(String.format("Input %s to element by locator: %s", text, by.toString()));
     }
 
