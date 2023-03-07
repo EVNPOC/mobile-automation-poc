@@ -3,19 +3,15 @@ pipeline {
     stages {
         stage('execute test') {
             steps {
-                sh '''#!/bin/bash --login -x
-                ./apache-maven-3.9.0/bin/mvn clean test
-                '''
+                bat './apache-maven-3.9.0/bin/mvn clean test'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "exit 1"
+                    bat "exit 1"
                 }
             }
         }
         stage('generate report') {
             steps {
-                sh '''#!/bin/bash --login -x
-                ./apache-maven-3.9.0/bin/mvn allure:report
-                '''
+                bat './apache-maven-3.9.0/bin/mvn allure:report'
             }
         }
     }
