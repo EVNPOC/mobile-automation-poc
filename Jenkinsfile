@@ -1,14 +1,17 @@
 pipeline {
     agent any
 
-    triggers {
-        cron('H 0 * * *')
-    }
+    properties([pipelineTriggers([cron('H 0 * * *'), githubPush()])])
 
     stages {
+        stage('Clean Test Report') {
+            steps {
+                bat './apache-maven-3.9.0/bin/mvn clean'
+            }
+        }
         stage('Execute Test') {
             steps {
-                bat './apache-maven-3.9.0/bin/mvn clean test'
+                bat './apache-maven-3.9.0/bin/mvn test'
             }
         }
         stage('Generate allure report') {
