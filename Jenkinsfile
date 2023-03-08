@@ -5,12 +5,13 @@ pipeline {
             steps {
                 bat './apache-maven-3.9.0/bin/mvn clean test'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    bat "exit 1"
+                    echo 'Error when running the test cases'
                 }
             }
         }
         stage('generate report') {
             steps {
+                bat './apache-maven-3.9.0/bin/mvn allure:report'
                 script {
                         allure([
                                 includeProperties: false,
@@ -20,7 +21,6 @@ pipeline {
                                 results: [[path: 'target/allure-results']]
                         ])
                 }
-                bat './apache-maven-3.9.0/bin/mvn allure:report'
             }
         }
     }
