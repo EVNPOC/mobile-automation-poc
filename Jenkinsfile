@@ -1,7 +1,7 @@
+properties([pipelineTriggers([cron('H 0 * * *'), githubPush()])])
+
 pipeline {
     agent any
-
-    properties([pipelineTriggers([cron('H 0 * * *'), githubPush()])])
 
     stages {
         stage('Clean Test Report') {
