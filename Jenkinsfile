@@ -4,7 +4,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Clean Test Report') {
+        stage('Clean Test') {
             steps {
                 bat './apache-maven-3.9.0/bin/mvn clean'
             }
